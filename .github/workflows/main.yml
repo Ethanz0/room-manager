@@ -1,0 +1,41 @@
+name: Run Pytest Test Suite
+
+on:
+  push:
+    branches:
+        - test_github_actions
+        - "test*"  # Any branch starting with "test"
+        # All branches
+        # - "**"
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache Python virtual environment
+        uses: actions/cache@v3
+        with:
+          path: ./venv
+          # Use the hash of requirements.txt to create a unique cache key, so the cache is updated when dependencies change
+          key: pip-cache-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Install Python virtual environment and dependencies
+        run: |
+            python -m venv venv
+            source venv/bin/activate
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+
+      - name: Run pytest
+        run: |
+            source venv/bin/activate
+            pytest -v

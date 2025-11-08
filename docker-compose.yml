@@ -1,0 +1,114 @@
+services:
+  master:
+    build: .
+    networks:
+      - development
+    env_file:
+      - .env
+    environment:
+      - IS_DOCKER=true
+      # Set to true for when running the mariadb container for the masterpi to initialize the database
+      - DB_INIT_CONFIG=true
+      - ROLE=master
+      - HOST=0.0.0.0
+      - PORT=5001
+      - SOCKET_HOST=0.0.0.0
+      - SOCKET_PORT=6001
+      - REMOTE_DB_HOST=remote-db
+    ports:
+      - "5001:5001"
+      - "6001:6001"
+    expose:
+      - "6001:6001"
+    volumes:
+      - ./src:/iot-app/src
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - remote-db
+      - mqtt
+
+  agent:
+    build: .
+    networks:
+      - development
+    env_file:
+      - .env
+    environment:
+      - IS_DOCKER=true
+      - ROLE=agent
+      - HOST=0.0.0.0
+      - PORT=5002
+      - SOCKET_HOST=0.0.0.0
+      - SOCKET_PORT=6002
+      - REMOTE_DB_HOST=remote-db
+    ports:
+      - "5002:5002"
+      - "6002:6002"
+    expose: 
+      - "6002:6002"
+    volumes:
+      - ./src:/iot-app/src
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - remote-db
+      - master
+      - mqtt
+
+  room:
+    build: .
+    networks:
+      - development
+    env_file:
+      - .env
+    environment:
+      - IS_DOCKER=true
+      - ROLE=room
+      - HOST=0.0.0.0
+      - PORT=5003
+      - SOCKET_HOST=0.0.0.0
+      - SOCKET_PORT=6003
+      - REMOTE_DB_HOST=remote-db
+    ports:
+      - "5003"
+    expose: 
+      - "6003"
+    volumes:
+      - ./src:/iot-app/src
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    depends_on:
+      - remote-db
+      - master
+      - mqtt
+
+  remote-db:
+    image: mariadb:12.0.2
+    container_name: remote-db
+    restart: always
+    networks:
+      - development
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+
+  mqtt:
+    image: eclipse-mosquitto:2.0.22
+    container_name: mqtt
+    restart: always
+    networks:
+      - development
+    ports:
+      - "1883:1883"
+      - "9001"
+    volumes:
+      - ./src/common/communication/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./src/common/communication/mosquitto/data:/mosquitto/data
+      - ./src/common/communication/mosquitto/log:/mosquitto/log
+
+networks:
+  development:
+    driver: bridge

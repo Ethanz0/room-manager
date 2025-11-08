@@ -1,0 +1,14 @@
+pytest
+pytest-cov
+pytest-mock
+paho-mqtt
+dotenv
+
+Flask
+flask-socketio
+
+mysqlclient
+
+sense-hat
+
+matplotlib

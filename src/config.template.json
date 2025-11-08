@@ -1,0 +1,37 @@
+{
+    "roles": {
+        "master": "master",
+        "room": "room",
+        "agent": "agent",
+        "database": "database"
+    },
+    "{NAME_ID}": {
+        "db_init_config": "{DB_INIT_CONFIG}",
+        "role": "{ROLE}",
+        "ip_address": "{IP_ADDRESS}",
+        "host": "{HOST}",
+        "port": "{PORT}",
+        "socket_host": "{SOCKET_HOST}",
+        "socket_port": "{SOCKET_PORT}",
+        "remote_db_host": "{REMOTE_DB_HOST}",
+        "mqtt_broker_host": "{MQTT_BROKER_HOST}",
+        "mqtt_broker_port": "{MQTT_BROKER_PORT}",
+        "master_host": "{MASTER_HOST}",
+        "master_port": "{MASTER_PORT}",
+        "master_socket_port": "{MASTER_SOCKET_PORT}",
+        "agent_socket": "{AGENT_SOCKET}",
+        "agent_socket_port": "{AGENT_SOCKET_PORT}",
+        "room_socket": "{ROOM_SOCKET}",
+        "room_socket_port": "{ROOM_SOCKET_PORT}",
+        "agent_port": "{AGENT_PORT}",
+        "room_port": "{ROOM_PORT}",
+        "secret_key": "{SECRET_KEY}",
+
+        "agents": [
+            "[AGENT_ADDRESSES]"
+        ],
+        "rooms": [
+            "[ROOM_ADDRESSES]"
+        ]
+    }
+}

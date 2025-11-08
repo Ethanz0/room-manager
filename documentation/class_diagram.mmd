@@ -1,0 +1,92 @@
+classDiagram
+    %% Core Devices
+    class MasterPi {
+        +startServer(config)
+    }
+
+    class AgentPi {
+        +startServer(config)
+    }
+
+    class RoomPi {
+        +startServer(config)
+        +displayRoomStatus()
+
+    }
+
+    class Authentication {
+        +????()
+    }
+
+    class Config {
+
+    }
+
+    %% Communication
+    class SocketClient {
+        +sendRequest()
+        +receiveResponse()
+    }
+
+    class SocketServer {
+        +listen()
+        +processRequest()
+        +sendResponse()
+    }
+
+    class MQTTClient {
+        +publish()
+        +subscribe()
+    }
+
+    class MQTTServer {
+        +start()
+    }
+
+    %% Data layer
+    class RemoteDatabase {
+
+    }
+
+    %% User Roles
+    class User {
+
+    }
+
+    class Admin {
+
+    }
+
+    class SecurityStaff {
+    }
+
+    %% Relationships
+    %% User Roles
+    User --> AgentPi : register/login
+    SecurityStaff --> AgentPi : login
+    Admin --> MasterPi : login
+
+    %% Defined ports into config
+    MasterPi ..> Config : uses
+    AgentPi ..> Config : uses
+    RoomPi ..> Config : uses
+
+    %% Core Devices
+    AgentPi --> SocketClient : JSON
+    AgentPi --> MQTTClient : subcribe - JSON
+    RoomPi --> MQTTClient : subscribe - JSON
+    RoomPi --> SocketClient : JSON
+    MasterPi --> SecurityStaff : create
+    MasterPi --> SocketServer : listen
+    MasterPi --> MQTTServer : start
+    MasterPi --> MQTTClient : publish - JSON
+    MasterPi --> RemoteDatabase : Python - MySQLdb
+
+    %% Communication
+    SocketClient --> SocketServer : JSON
+    MQTTClient <--> MQTTServer : JSON
+
+
+
+%% Questions 
+%% 

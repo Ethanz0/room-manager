@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Booking Monitoring</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/static/js/speech-recognition.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div>
+                <a class="navbar-brand" href="/">Dashboard</a>
+                <a class="navbar-brand" href="/users">User Management</a>
+                <a class="navbar-brand" href="/logs">System Logs</a>
+                <a class="navbar-brand" href="/bookings">Booking Monitoring</a>
+                <a class="navbar-brand" href="/rooms">Manage Rooms</a>
+                <a class="navbar-brand" href="/announcements">Announcements</a>
+            </div>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </nav>
+    <div class="container my-4">
+        <h2>Publish Announcement</h2>
+        <form id="announcementForm" action="/publish_announcement" method="post"
+            onsubmit="event.preventDefault(); submitAnnouncement(this)">
+            <!-- If your backend requires CSRF token, insert it here -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <div class="input-group">
+                    <input required type="text" class="form-control" id="announcementTitle" name="announcementTitle"
+                        placeholder="Announcement title" />
+                    <button class="btn btn-outline-secondary" type="button" id="voiceTitleBtn" aria-pressed="false"
+                        title="Use voice input for title">🎤</button>
+                </div>
+                <div class="form-text">
+                    <span id="voiceTitleStatus" class="text-muted">Voice: not supported or inactive</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="announcementType" class="form-label">Type</label>
+                <select required class="form-select" id="announcementType" name="announcementType"
+                    aria-label="Announcement type">
+                    <option value="" selected disabled>Select type...</option>
+                    <optgroup label="Priority">
+                        <option value="urgent">Urgent</option>
+                        <option value="fault">Fault</option>
+                        <option value="warning">Warning</option>
+                    </optgroup>
+                    <optgroup label="Category">
+                        <option value="information">Information</option>
+                        <option value="general">General</option>
+                        <option value="room">Room</option>
+                        <option value="user">User</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="announcementText" class="form-label">Announcement</label>
+                <div class="input-group">
+                    <textarea required class="form-control" id="announcementText" name="announcementMessage" rows="4"
+                        placeholder="Type your announcement or use voice input..."></textarea>
+                    <button class="btn btn-outline-secondary" type="button" id="voiceBtn" aria-pressed="false"
+                        title="Use voice input">
+                        🎤 Start voice
+                    </button>
+                </div>
+                <div class="form-text">
+                    <span id="voiceStatus" class="text-muted">Voice input: not supported or inactive</span>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Publish</button>
+                <button type="button" id="clearBtn" class="btn btn-secondary">Clear</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

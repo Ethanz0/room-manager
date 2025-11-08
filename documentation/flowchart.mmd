@@ -1,0 +1,27 @@
+flowchart TD
+    %% User Actions
+    User["User"] -->|register/login| AgentPi((AgentPi))
+    SecurityStaff["SecurityStaff"] -->|login| AgentPi
+    Admin["Admin"] -->|login| MasterPi((MasterPi))
+
+    %% Core Devices
+    MasterPi -->|create| SecurityStaff
+    MasterPi -->|listen| SocketServer((SocketServer))
+    MasterPi -->|start| MQTTServer((MQTTServer))
+    MasterPi -->|publish JSON| MQTTClient((MQTTClient))
+    MasterPi -->|Python - MySQLdb| RemoteDatabase[(RemoteDatabase)]
+
+    AgentPi -->|JSON| SocketClient((SocketClient))
+    AgentPi -->|subscribe JSON| MQTTClient
+
+    RoomPi((RoomPi)) -->|subscribe JSON| MQTTClient
+    RoomPi -->|JSON| SocketClient
+
+    %% Communication
+    SocketClient -->|JSON| SocketServer
+    MQTTClient <-->|JSON| MQTTServer
+
+    %% Config usage
+    MasterPi -.->|uses| Config((Config))
+    AgentPi -.->|uses| Config
+    RoomPi -.->|uses| Config

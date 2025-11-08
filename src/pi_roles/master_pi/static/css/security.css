@@ -1,0 +1,91 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f0f8ff;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+button[type="submit"] {
+    background-color: cadetblue;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.status .available {
+    background-color: #28a745;
+    color: #fff4f4;
+}
+
+.status .reserved {
+    background-color: #17a2b8;
+    color: #fff4f4;
+}
+
+.status .in-use {
+    background-color: #007bff;
+    color: #fff4f4;
+}
+
+.status .maintenance {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.status .fault {
+    background-color: #dc3545;
+    color: #fff4f4;
+}
+
+.status .none {
+    background-color: #6c757d;
+    color: #fff4f4;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+}

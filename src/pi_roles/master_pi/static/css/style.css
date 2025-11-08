@@ -1,0 +1,83 @@
+.log-type-badge {
+font-size: 0.75rem;
+font-weight: 600;
+}
+.log-DB_QUERY {
+background-color: #6f42c1;
+}
+.log-DB_INFO {
+background-color: #0dcaf0;
+}
+.log-DB_ERROR {
+background-color: #dc3545;
+}
+.log-HTTP_REQUEST {
+background-color: #198754;
+}
+.log-HTTP_RESPONSE {
+background-color: #20c997;
+}
+.log-SOCKET_RECEIVE {
+background-color: #0d6efd;
+}
+.log-SOCKET_RESPONSE {
+background-color: #6610f2;
+}
+.log-SOCKET_INFO {
+background-color: #17a2b8;
+}
+.log-SOCKET_ERROR {
+background-color: #dc3545;
+}
+.log-NETWORK {
+background-color: #fd7e14;
+}
+.log-NETWORK_ERROR {
+background-color: #dc3545;
+}
+.log-MQTT_PUBLISH {
+background-color: #d63384;
+}
+.log-MQTT_SUBSCRIBE {
+background-color: #e83e8c;
+}
+.log-MQTT_ERROR {
+background-color: #dc3545;
+}
+.log-DEBUG {
+background-color: #6c757d;
+}
+.log-INFO {
+background-color: #0dcaf0;
+}
+.log-WARNING {
+background-color: #ffc107;
+}
+.log-ERROR {
+background-color: #dc3545;
+}
+.log-CRITICAL {
+background-color: #842029;
+}
+.description-cell {
+max-width: 1500px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+font-family: "Courier New", monospace;
+font-size: 0.85rem;
+}
+.description-cell:hover {
+white-space: normal;
+overflow: visible;
+}
+.table-responsive {
+max-height: 70vh;
+overflow-y: auto;
+}
+.filter-section {
+background-color: #f8f9fa;
+padding: 1rem;
+border-radius: 0.5rem;
+margin-bottom: 1rem;
+}

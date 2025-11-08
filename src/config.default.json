@@ -1,0 +1,82 @@
+{
+    "roles": {
+        "master": "master",
+        "room": "room",
+        "agent": "agent",
+        "database": "database"
+    },
+    "master": {
+        "role": "master",
+        "host": "0.0.0.0",
+        "port": 5001,
+        "remote_db_host": "0.0.0.0",
+        "socket_host": "0.0.0.0",
+        "socket_port": 6001,
+        "agents": [
+            "192.168.0.101:5002",
+            "192.168.0.102:5002"
+        ],
+        "rooms": [
+            "192.168.0.201:5003"
+        ]
+    },
+    "database": {
+        "role": "database",
+        "host": "0.0.0.0",
+        "port": 3306
+    },
+    "agent": {
+        "db_init_config": "{DB_INIT_CONFIG}",
+        "role": "agent",
+        "ip_address": "192.168.6.2",
+        "host": "0.0.0.0",
+        "port": 5003,
+        "socket_host": "0.0.0.0",
+        "socket_port": 6003,
+        "remote_db_host": "192.168.219.1",
+        "mqtt_broker_host": "192.168.6.1",
+        "mqtt_broker_port": 1883,
+        "master_host": "192.168.6.1",
+        "master_port": 5001,
+        "master_socket_port": 6001,
+        "agent_port": 5002,
+        "agent_socket_port": 6002,
+        "room_port": 5003,
+        "room_socket_port": 6003,
+        "secret_key": "a8f5f167f07f0def8e8b3c2b8f89e7c9d4e3f2a1b5c6d7e8f9a0b1c2d3e4f5a6",
+
+        "agents": [
+            "[AGENT_ADDRESSES]"
+        ],
+        "rooms": [
+            "[ROOM_ADDRESSES]"
+        ]
+    },
+    "room": {
+        "db_init_config": "{DB_INIT_CONFIG}",
+        "role": "room",
+        "ip_address": "192.168.6.2",
+        "host": "0.0.0.0",
+        "port": 5003,
+        "socket_host": "0.0.0.0",
+        "socket_port": 6003,
+        "remote_db_host": "192.168.219.1",
+        "mqtt_broker_host": "192.168.6.1",
+        "mqtt_broker_port": 1883,
+        "master_host": "192.168.6.1",
+        "master_port": 5001,
+        "master_socket_port": 6001,
+        "agent_port": 5002,
+        "agent_socket_port": 6002,
+        "room_port": 5003,
+        "room_socket_port": 6003,
+        "secret_key": "a8f5f167f07f0def8e8b3c2b8f89e7c9d4e3f2a1b5c6d7e8f9a0b1c2d3e4f5a6",
+
+        "agents": [
+            "[AGENT_ADDRESSES]"
+        ],
+        "rooms": [
+            "[ROOM_ADDRESSES]"
+        ]
+    }
+}

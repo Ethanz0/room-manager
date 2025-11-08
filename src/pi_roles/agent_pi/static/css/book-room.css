@@ -1,0 +1,41 @@
+.time-selection {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+#time-selection-container {
+    display: flex;
+    gap: 1rem;
+}
+
+label {
+    margin-right: 0.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, td {
+    border: 1px solid #d6d6d6; /* Dark border for lines */
+    padding: 0.5rem;
+}
+
+#no-rooms-available {
+    display: none;
+}
+
+#available-rooms-table {
+    display: none;
+}
+
+#available-rooms-text {
+    display: none;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

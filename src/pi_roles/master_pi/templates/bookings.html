@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Booking Monitoring</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div>
+                <a class="navbar-brand" href="/">Dashboard</a>
+                <a class="navbar-brand" href="/users">User Management</a>
+                <a class="navbar-brand" href="/logs">System Logs</a>
+                <a class="navbar-brand" href="/bookings">Booking Monitoring</a>
+                <a class="navbar-brand" href="/rooms">Manage Rooms</a>
+                <a class="navbar-brand" href="/announcements">Announcements</a>
+            </div>
+            <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5" style="padding-left: 70px; padding-right: 70px;">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>User Management</h2>
+            <a href="/bookings/download" class="btn btn-success">Download Booking Report</a>
+        </div>    
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Booking ID</th>
+                    <th scope="col">Date Booked</th>
+                    <th scope="col">Room ID</th>
+                    <th scope="col">Room Name</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Access Token</th>
+                    <th scope="col">Checked In</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.booking_id }}</td>
+                    <td>{{ booking.booking_time }}</td>
+                    <td>{{ booking.room_id }}</td>
+                    <td>{{ booking.room_name }}</td>
+                    <td>{{ booking.user_id }}</td>
+                    <td>{{ booking.first_name }} {{ booking.last_name }}</td>
+                    <td>{{ booking.start_time }}</td>
+                    <td>{{ booking.end_time }}</td>
+                    <td>{{ booking.access_token }}</td>
+                    <td>
+                        {% if booking.checked_in %}
+                            <span class="badge bg-success">Yes</span>
+                        {% else %}
+                            <span class="badge bg-secondary">No</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="10" class="text-center text-muted">No bookings found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

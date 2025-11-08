@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Book Room</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/book-room.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script type="module" src="/static/js/webSocketNotification.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <a href="dashboard">Dashboard</a>
+        <a href="book-room">Book a room</a>
+        <a href="booked-rooms">My booked rooms</a>
+        {% if agent_role == "Security" %}
+        <a href="manage-rooms">Room Management</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        <div id="notifications">
+        </div>
+        <h1>Book Room</h1>
+
+        <div class="time-selection" id="date-selection">
+            <label>Date</label>
+            <input type="date" id="booking-date" name="booking-date">
+        </div>
+
+        <div id="time-selection-container">
+            <div class="time-selection">
+                <label>From</label>
+                <input type="time" id="start-time" name="booking-time-from">
+            </div>
+
+            <div class="time-selection">
+                <label>To</label>
+                <input type="time" id="end-time" disabled="true" name="booking-time-to">
+            </div>
+        </div>
+
+        <button onclick="searchAvailableRooms()" class="primary">Search</button>
+        <p id="msg"></p>
+
+        <h2 id="available-rooms-text">Available rooms</h2>
+
+        <p id="no-rooms-available">No rooms available for your selected date and time.</p>
+
+        <table id="available-rooms-table">
+            <thead>
+                <tr>
+                    <th id="room-column">Room</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="rooms-table-body">
+                <!-- Available rooms will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/static/js/book-room.js"></script>
+</body>
+
+</html>

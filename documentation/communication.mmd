@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant FE as Frontend (Web App)
+    participant FL as Flask Backend
+    participant MP as MasterPi
+    participant AG as AgentPis
+    participant RM as RoomPis
+    participant MQTT as MQTT Broker
+
+    %% Frontend requests
+    FE->>FL: HTTP POST / WebSocket event (e.g., "register_user")
+    FL->>MP: TCP request OR MQTT publish
+    MP->>MP: Process request
+    MP->>FL: TCP response OR MQTT publish
+    FL->>FE: HTTP/WebSocket response
+
+    %% IoT status updates via MQTT
+    MP->>MQTT: Publish status / sensor data
+    AG->>MQTT: Publish agent updates
+    RM->>MQTT: Publish room updates
+    FL->>MQTT: Subscribe to topics
+    MQTT->>FL: Subscribed messages trigger event
+    FL->>FE: Emit updates via WebSocket
+
+    %% Frontend controls IoT devices
+    FE->>FL: Control command (e.g., "toggle_light")
+    FL->>AG: TCP request OR MQTT publish
+    AG->>FL: Response / status
+    FL->>FE: Update UI

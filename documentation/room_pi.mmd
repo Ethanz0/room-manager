@@ -1,0 +1,28 @@
+flowchart TD
+
+    subgraph RoomPi["🏠 Room Pi"]
+        Display[Display Web Dashboard<br>Every 10s Update<br>• Temp<br>• Humidity<br>• Pressure<br>• Status<br>• Next Booking]
+        StatusLogic[Status Logic<br>• Auto-update on Check-in/Check-out<br>• Modifiable by Admin or Security]
+        FaultAlert[Alert: When Status = 'Fault'<br>-> Notify Master Pi]
+    end
+
+    subgraph Users["👥 Users"]
+        CheckIn[User Check-In/Out]
+    end
+
+    subgraph Staff["🧑‍💼 Admin & Security"]
+        Admin[Admin - Remote Status Change]
+        Security[Security - Local Status Change]
+    end
+
+    subgraph MasterPi["🖥️ Master Pi"]
+        ReceiveAlert[Receive Fault Alert<br>Publish Event]
+    end
+
+    %% Connections
+    CheckIn -->|Triggers Status Update| StatusLogic
+    Admin -->|Remote Modify| StatusLogic
+    Security -->|Local Modify| StatusLogic
+    StatusLogic -->|Update Display| Display
+    StatusLogic -->|If Status='Fault'| FaultAlert
+    FaultAlert -->|Send Alert| MasterPi

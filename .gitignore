@@ -1,0 +1,14 @@
+__pycache__/
+.env
+config.json
+
+# Mosquitto MQTT
+mosquitto.db
+mosquitto.log
+
+# Coverage files
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+.pytest_cache/

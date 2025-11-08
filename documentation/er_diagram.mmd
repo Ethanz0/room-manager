@@ -1,0 +1,35 @@
+erDiagram
+    USER {
+        int user_id PK
+        string username
+        string role
+        string subrole
+        string email
+        string password_hash
+    }
+
+    ROOM {
+        int room_id PK
+        string room_name
+        string status
+        string location
+        string description 
+        int capacity
+    }
+
+    BOOKING {
+        int booking_id
+        int room_id PK
+        int user_id PK
+        datetime start_time
+        datetime end_time
+        datetime created_at
+    }
+
+    USAGE_LOGS {
+        int log_id PK
+        int booking_id FK
+        datetime timestamp
+        string type
+        string description 
+    }
